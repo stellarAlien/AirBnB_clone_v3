@@ -5,6 +5,7 @@ Contains the TestDBStorageDocs and TestDBStorage classes
 
 from datetime import datetime
 import inspect
+from multiprocessing import dummy
 import models
 from models.engine import db_storage
 from models.amenity import Amenity
@@ -14,6 +15,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+
 import json
 import os
 import pep8
@@ -86,3 +88,24 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+    
+    def test_model_storage(self):
+        """
+            Test to check if storage is an instance for DBStorage
+        """
+        self.assertTrue(isinstance(storage, DBStorage))
+        
+    def test_get_func(self):
+       """see if fet returns as expected"""
+       dummy = "fiji" + "." + "12345"
+       r = DBStorage.get(dummy)
+       self.assertisNone(r)
+    
+    def test_count(self):
+        """count the elements"""
+        storage.reload()
+        all_count = self.storage.count()
+        self.assertIsInstance(all_count, int)
+        cls_count = self.storage.count("State")
+        self.assertIsInstance(cls_count, int)
+        self.assertGreaterEqual(all_count, cls_count)

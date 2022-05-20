@@ -113,3 +113,18 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+        
+    def test_get_func(self):
+           """see if fet returns as expected"""
+       dummy = "fiji" + "." + "12345"
+       r = DBStorage.get(dummy)
+       self.assertisNone(r)
+    
+    def test_count(self):
+        """count the elements"""
+        storage.reload()
+        all_count = self.storage.count()
+        self.assertIsInstance(all_count, int)
+        cls_count = self.storage.count("State")
+        self.assertIsInstance(cls_count, int)
+        self.assertGreaterEqual(all_count, cls_count)
