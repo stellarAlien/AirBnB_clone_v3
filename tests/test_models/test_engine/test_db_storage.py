@@ -6,6 +6,7 @@ Contains the TestDBStorageDocs and TestDBStorage classes
 from datetime import datetime
 import inspect
 from multiprocessing import dummy
+from AirBnB_clone_v3.tests.test_models.test_engine.test_file_storage import FileStorage
 import models
 from models.engine import db_storage
 from models.amenity import Amenity
@@ -103,6 +104,7 @@ class TestFileStorage(unittest.TestCase):
     
     def test_count(self):
         """count the elements"""
+        storage = FileStorage()
         storage.reload()
         all_count = self.storage.count()
         self.assertIsInstance(all_count, int)

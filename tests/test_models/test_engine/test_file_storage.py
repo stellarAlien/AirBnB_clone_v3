@@ -122,6 +122,7 @@ class TestFileStorage(unittest.TestCase):
     
     def test_count(self):
         """count the elements"""
+        storage = FileStorage()
         storage.reload()
         all_count = self.storage.count()
         self.assertIsInstance(all_count, int)

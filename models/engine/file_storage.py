@@ -77,7 +77,7 @@ class FileStorage:
         """
         if obj and id:
             try:
-                key = string(cls) + "." + id
+                key = "{}.{}".format(cls, id)
                 obj = self.__dict[key]
             except IndexError:
                 return None
