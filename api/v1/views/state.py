@@ -2,10 +2,10 @@
 """
 States Module
 """
-from api.v1.views import app_views
+from ..views import app_views
 from flask import jsonify, abort, request, make_response
-from models import storage
-from models.state import State
+from ....models import storage
+from ....models.state import State
 
 
 def checker(id):
@@ -26,7 +26,7 @@ def getStates(state_id):
     if state_id is not None:
         state = checker(state_id)
         dictionnary = state.to_dict()
-        return jsonify(dict_state)
+        return jsonify(dictionnary)
     states = storage.all(State)
     statesList = []
     for state in states.values():
@@ -38,7 +38,7 @@ def delState(state_id):
     """ Delete the state with the state_id """
     if state_id is not None:
         state = checker(state_id)
-        if not obj:
+        if not state:
             return make_response(jsonify({"error": "Not Found"}), 404)
         storage.delete(state)
         storage.save()
