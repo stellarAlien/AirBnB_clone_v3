@@ -8,3 +8,4 @@ from api.v1.views.index import *  # noqa: E402, E261
 
 """import flask app  views"""
 from api.v1.views.states import *
+from api.v1.views.users import *
